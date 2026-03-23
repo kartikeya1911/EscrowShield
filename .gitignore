@@ -1,0 +1,13 @@
+﻿# Root (Hardhat)
+node_modules/
+cache/
+artifacts/
+typechain-types/
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+
+# Env
+.env
+frontend/.env.local
