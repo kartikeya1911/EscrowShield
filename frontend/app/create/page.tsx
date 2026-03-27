@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
@@ -91,7 +92,9 @@ export default function CreateTransactionPage() {
                   Connect Wallet
                 </Button>
               )}
-              <Button type="button" variant="outline" onClick={() => window.location.assign("/dashboard")}>View Dashboard</Button>
+              <Link href="/dashboard">
+                <Button type="button" variant="outline">View Dashboard</Button>
+              </Link>
             </div>
           </form>
         </Card>

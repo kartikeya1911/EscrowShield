@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -107,7 +107,7 @@ export default function DashboardPage() {
                   <p>Release: {formatDate(row.releaseTime)}</p>
                 </div>
                 <p className="text-sm">{row.description}</p>
-                <Link href={`/verify/${Number(row.id)}`} className="inline-flex text-sm font-medium text-brand hover:underline">
+                <Link href={`/verify?id=${Number(row.id)}`} className="inline-flex text-sm font-medium text-brand hover:underline">
                   Open Verification Page
                 </Link>
               </Card>
@@ -118,3 +118,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

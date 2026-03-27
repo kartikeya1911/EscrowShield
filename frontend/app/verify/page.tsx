@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,9 +17,9 @@ import { getExplorerBase } from "@/lib/constants";
 import { useWalletStore } from "@/store/wallet";
 import { Escrow } from "@/types/escrow";
 
-export default function VerifyPage() {
-  const params = useParams<{ id: string }>();
-  const escrowId = Number(params.id);
+function VerifyPageContent() {
+  const searchParams = useSearchParams();
+  const escrowId = Number(searchParams.get("id"));
   const { address, chainId } = useWalletStore();
   const [loading, setLoading] = useState(true);
   const [working, setWorking] = useState(false);
@@ -27,7 +27,12 @@ export default function VerifyPage() {
   const [actionHash, setActionHash] = useState<string | null>(null);
 
   const refresh = async () => {
-    if (Number.isNaN(escrowId)) return;
+    if (Number.isNaN(escrowId)) {
+      setEscrow(null);
+      setLoading(false);
+      return;
+    }
+
     try {
       const result = await fetchEscrow(escrowId);
       setEscrow(result);
@@ -39,10 +44,14 @@ export default function VerifyPage() {
   };
 
   useEffect(() => {
+    setLoading(true);
     refresh();
+
+    if (Number.isNaN(escrowId)) return;
+
     const timer = setInterval(refresh, 12000);
     return () => clearInterval(timer);
-  }, [params.id]);
+  }, [escrowId]);
 
   const isBuyer = useMemo(() => {
     if (!address || !escrow) return false;
@@ -69,6 +78,18 @@ export default function VerifyPage() {
         <Skeleton className="h-10 w-56" />
         <Skeleton className="h-48 w-full" />
       </div>
+    );
+  }
+
+  if (Number.isNaN(escrowId)) {
+    return (
+      <Card className="space-y-3">
+        <h1 className="font-heading text-2xl font-semibold tracking-tight">Verification Page</h1>
+        <p className="text-sm text-[var(--muted)]">Open this page with an escrow id, for example `/verify?id=1`.</p>
+        <Link href="/dashboard" className="inline-flex text-sm font-medium text-brand hover:underline">
+          Back to dashboard
+        </Link>
+      </Card>
     );
   }
 
@@ -145,5 +166,20 @@ export default function VerifyPage() {
         Back to dashboard
       </Link>
     </motion.div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="space-y-4">
+          <Skeleton className="h-10 w-56" />
+          <Skeleton className="h-48 w-full" />
+        </div>
+      }
+    >
+      <VerifyPageContent />
+    </Suspense>
   );
 }
