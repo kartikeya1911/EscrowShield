@@ -22,6 +22,9 @@ const steps = [
 ];
 
 export default function Home() {
+  const demoVideoUrl = "https://drive.google.com/uc?export=download&id=1Rf_9PxBN0KFGVkvsB2bJx6THU4YRwVD3";
+  const demoPreviewUrl = "https://drive.google.com/file/d/1Rf_9PxBN0KFGVkvsB2bJx6THU4YRwVD3/preview";
+
   return (
     <div className="space-y-14">
       <section className="grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--surface)]/90 p-8 shadow-card backdrop-blur md:grid-cols-[1.2fr,1fr] md:p-12">
@@ -103,6 +106,55 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-[1.2fr,0.8fr]">
+        <Card className="space-y-3">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight">About EscrowShield</h2>
+          <p className="text-sm text-[var(--muted)]">
+            EscrowShield is a trustless payment layer for freelancers, vendors, and buyers. Funds lock into audited smart contracts, release on confirmation or timeout, and every action is fully transparent on-chain.
+          </p>
+          <div className="grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
+            <div>
+              <p className="font-semibold text-[var(--foreground)]">What you get</p>
+              <ul className="mt-1 space-y-1">
+                <li>• Smart-contract escrow with auto release</li>
+                <li>• Refund path before timeout</li>
+                <li>• Dashboard of all escrows</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-semibold text-[var(--foreground)]">Networks</p>
+              <p className="mt-1">Sepolia by default; localhost for dev.</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href={demoVideoUrl} target="_blank" rel="noreferrer" className="inline-flex">
+              <Button>Watch Demo</Button>
+            </Link>
+            <Link href="/dashboard">
+              <Button variant="outline">Open Dashboard</Button>
+            </Link>
+          </div>
+        </Card>
+        <Card className="space-y-3">
+          <h3 className="font-heading text-xl font-semibold">Demo Preview</h3>
+          <p className="text-sm text-[var(--muted)]">Watch the product walkthrough to see escrow creation, delivery confirmation, and auto release.</p>
+          <div className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] p-3">
+            <div className="relative aspect-video overflow-hidden rounded-lg">
+              <iframe
+                src={demoPreviewUrl}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full border-0"
+                title="EscrowShield Demo"
+              />
+            </div>
+            <div className="mt-2 text-xs text-[var(--muted)]">
+              If playback fails, <a className="font-semibold text-brand hover:underline" href={demoVideoUrl} target="_blank" rel="noreferrer">open the video</a> in a new tab.
+            </div>
+          </div>
+        </Card>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">
