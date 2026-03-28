@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useWalletStore } from "@/store/wallet";
 import { createEscrowTx } from "@/lib/escrow";
-import { getExplorerBase } from "@/lib/constants";
+import { getExplorerBase, TARGET_CHAIN_ID } from "@/lib/constants";
 
 export default function CreateTransactionPage() {
   const { address, connectWallet, chainId, isCorrectNetwork } = useWalletStore();
@@ -30,7 +30,7 @@ export default function CreateTransactionPage() {
     }
 
     if (!isCorrectNetwork) {
-      toast.error("Switch to Hardhat localhost network (31337)");
+      toast.error(`Switch to chain ${TARGET_CHAIN_ID}`);
       return;
     }
 
@@ -134,7 +134,7 @@ export default function CreateTransactionPage() {
         <Card className="space-y-2">
           <h3 className="font-heading text-lg font-semibold">Network Check</h3>
           <p className="text-sm text-[var(--muted)]">
-            Connected chain: {chainId ?? "Not connected"} {isCorrectNetwork ? "(Ready)" : "(Switch to 31337)"}
+            Connected chain: {chainId ?? "Not connected"} {isCorrectNetwork ? "(Ready)" : `(Switch to ${TARGET_CHAIN_ID})`}
           </p>
         </Card>
       </motion.aside>

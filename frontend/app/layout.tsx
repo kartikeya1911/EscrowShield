@@ -10,7 +10,7 @@ const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
 export const metadata: Metadata = {
-  title: "EscrowFlow - Smart Contract Payment Verification",
+  title: "EscrowShield - Smart Contract Payment Verification",
   description: "Trustless escrow payments with buyer verification and auto-release conditions."
 };
 

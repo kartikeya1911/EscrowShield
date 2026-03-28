@@ -11,15 +11,16 @@ const config: Config = {
     extend: {
       colors: {
         slate: {
-          950: "#0b0d0c"
+          950: "#0a101c"
         },
         brand: {
-          DEFAULT: "#16a34a",
-          foreground: "#f0fdf4"
+          DEFAULT: "#22d3ee",
+          foreground: "#041019",
+          soft: "#e6fbff"
         },
         accent: {
-          DEFAULT: "#f97316",
-          foreground: "#fff7ed"
+          DEFAULT: "#c084fc",
+          foreground: "#f8edff"
         }
       },
       fontFamily: {

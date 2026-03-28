@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import toast from "react-hot-toast";
-import { LOCAL_CHAIN_ID } from "@/lib/constants";
+import { TARGET_CHAIN_ID } from "@/lib/constants";
 import { getInjectedProvider } from "@/lib/web3";
 
 type WalletState = {
@@ -43,7 +43,7 @@ export const useWalletStore = create<WalletState>((set, get) => ({
     set({
       address: current,
       chainId,
-      isCorrectNetwork: chainId === LOCAL_CHAIN_ID
+      isCorrectNetwork: chainId === TARGET_CHAIN_ID
     });
 
     if (window.ethereum?.on) {
@@ -56,7 +56,7 @@ export const useWalletStore = create<WalletState>((set, get) => ({
         if (!refreshedProvider) return;
         const refreshedNetwork = await refreshedProvider.getNetwork();
         const updatedChain = Number(refreshedNetwork.chainId);
-        set({ chainId: updatedChain, isCorrectNetwork: updatedChain === LOCAL_CHAIN_ID });
+        set({ chainId: updatedChain, isCorrectNetwork: updatedChain === TARGET_CHAIN_ID });
       });
     }
   },
@@ -77,11 +77,11 @@ export const useWalletStore = create<WalletState>((set, get) => ({
       set({
         address: accounts[0] ?? null,
         chainId,
-        isCorrectNetwork: chainId === LOCAL_CHAIN_ID
+        isCorrectNetwork: chainId === TARGET_CHAIN_ID
       });
 
-      if (chainId !== LOCAL_CHAIN_ID) {
-        toast.error("Switch MetaMask to localhost network (31337)");
+      if (chainId !== TARGET_CHAIN_ID) {
+        toast.error(`Switch MetaMask to chain ${TARGET_CHAIN_ID}`);
       } else {
         toast.success("Wallet connected");
       }

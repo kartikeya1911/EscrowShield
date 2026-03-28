@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --background: #f7f8f7;
-  --foreground: #121513;
-  --muted: #5b625e;
+  --background: #f6f9ff;
+  --foreground: #0a0f1a;
+  --muted: #5a657a;
   --surface: #ffffff;
-  --surface-soft: #f1f4f2;
-  --border: #dce3df;
+  --surface-soft: #eef6ff;
+  --border: #d7e2f7;
 }
 
 .dark {
-  --background: #0b0d0c;
-  --foreground: #f4f6f5;
-  --muted: #a7b0aa;
-  --surface: #151917;
-  --surface-soft: #101412;
-  --border: #2a332d;
+  --background: #060b15;
+  --foreground: #e6f0ff;
+  --muted: #8c9bbc;
+  --surface: #0c1222;
+  --surface-soft: #0a1120;
+  --border: #172134;
 }
 
 * {
@@ -25,17 +25,23 @@
 }
 
 body {
-  background: radial-gradient(circle at top right, #ecfdf3 0%, var(--background) 44%), var(--background);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(34, 211, 238, 0.26) 0%, transparent 24%),
+    radial-gradient(circle at 82% 6%, rgba(192, 132, 252, 0.22) 0%, transparent 22%),
+    linear-gradient(135deg, #f6f9ff 0%, #eef6ff 40%, #f9fbff 100%);
   color: var(--foreground);
   font-family: var(--font-manrope), sans-serif;
   min-height: 100vh;
 }
 
 .dark body {
-  background: radial-gradient(circle at top right, #18311f 0%, var(--background) 44%), var(--background);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(34, 211, 238, 0.14) 0%, transparent 28%),
+    radial-gradient(circle at 82% 10%, rgba(192, 132, 252, 0.12) 0%, transparent 24%),
+    linear-gradient(135deg, #060b15 0%, #0a1324 38%, #050912 100%);
 }
 
 ::selection {
-  background: #16a34a;
-  color: #f0fdf4;
+  background: #22d3ee;
+  color: #041019;
 }

@@ -9,9 +9,9 @@ export function StatusBadge({ status }: BadgeProps) {
     <span
       className={cn(
         "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold",
-        status === "Locked" && "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-200",
-        status === "Released" && "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-200",
-        status === "Refunded" && "bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-100"
+        status === "Locked" && "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200",
+        status === "Released" && "bg-brand-soft text-[#0f1729] dark:bg-brand/25 dark:text-brand-foreground",
+        status === "Refunded" && "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-100"
       )}
     >
       {status}

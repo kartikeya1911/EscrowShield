@@ -13,8 +13,8 @@ export function Button({ className, variant = "primary", size = "default", loadi
     <button
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition disabled:cursor-not-allowed disabled:opacity-60",
-        variant === "primary" && "bg-brand px-4 py-2.5 text-brand-foreground hover:bg-[#148a40]",
-        variant === "outline" && "border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-[var(--foreground)] hover:bg-[var(--surface-soft)]",
+        variant === "primary" && "bg-brand px-4 py-2.5 text-brand-foreground shadow-[0_10px_30px_rgba(34,211,238,0.25)] hover:bg-[#12c8e1]",
+        variant === "outline" && "border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-[var(--foreground)] hover:border-brand hover:bg-[var(--surface-soft)]",
         variant === "ghost" && "px-3 py-2 text-[var(--foreground)] hover:bg-[var(--surface-soft)]",
         size === "icon" && "h-9 w-9 p-0",
         className

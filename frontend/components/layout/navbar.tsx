@@ -17,16 +17,17 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-20 border-b border-[var(--border)] bg-[color:var(--background)]/90 backdrop-blur-sm">
+    <header className="sticky top-0 z-20 border-b border-[var(--border)]/60 bg-[color:var(--background)]/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="font-heading text-xl font-semibold tracking-tight">
-          EscrowFlow
+        <Link href="/" className="flex items-center gap-2 font-heading text-xl font-semibold tracking-tight">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-accent text-[var(--foreground)] shadow-lg">ES</span>
+          <span>EscrowShield</span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium text-[var(--muted)] md:flex">
-          <Link href="/create" className="transition hover:text-[var(--foreground)]">
+        <nav className="hidden items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)]/80 px-3 py-1 text-sm font-medium text-[var(--muted)] shadow-sm backdrop-blur md:flex">
+          <Link href="/create" className="rounded-full px-3 py-2 transition hover:text-[var(--foreground)] hover:bg-[var(--surface-soft)]">
             Start Transaction
           </Link>
-          <Link href="/dashboard" className="transition hover:text-[var(--foreground)]">
+          <Link href="/dashboard" className="rounded-full px-3 py-2 transition hover:text-[var(--foreground)] hover:bg-[var(--surface-soft)]">
             Dashboard
           </Link>
         </nav>
@@ -36,9 +37,9 @@ export function Navbar() {
           </Button>
           {address ? (
             <>
-              <div className="flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs shadow-sm">
+              <div className="flex items-center gap-2 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/90 px-3 py-2 text-xs shadow-sm backdrop-blur">
                 <Wallet size={14} className={isCorrectNetwork ? "text-brand" : "text-accent"} />
-                <span>{truncateAddress(address)}</span>
+                <span className="font-semibold text-[var(--foreground)]">{truncateAddress(address)}</span>
                 <button onClick={copyAddress} className="text-[var(--muted)] transition hover:text-[var(--foreground)]" aria-label="Copy address">
                   <Copy size={14} />
                 </button>

@@ -24,21 +24,21 @@ const steps = [
 export default function Home() {
   return (
     <div className="space-y-14">
-      <section className="grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-8 shadow-card md:grid-cols-[1.2fr,1fr] md:p-12">
+      <section className="grid gap-10 rounded-3xl border border-[var(--border)] bg-[var(--surface)]/90 p-8 shadow-card backdrop-blur md:grid-cols-[1.2fr,1fr] md:p-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="space-y-5"
         >
-          <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700 dark:bg-green-900/40 dark:text-green-200">
-            Blockchain Payment Verification
+          <span className="inline-flex items-center gap-2 rounded-full bg-[var(--surface-soft)] px-3 py-1 text-xs font-semibold text-[#0b6ea4] shadow-sm dark:bg-brand/10 dark:text-brand-foreground">
+            <span className="h-2 w-2 rounded-full bg-brand" /> Live on-chain escrow
           </span>
-          <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
-            Secure Payments with Smart Contract Escrow
+          <h1 className="bg-gradient-to-r from-brand via-accent to-[#22d3ee] bg-clip-text font-heading text-4xl font-semibold tracking-tight text-transparent sm:text-5xl">
+            Secure payments without trusting people you just met
           </h1>
           <p className="max-w-xl text-base text-[var(--muted)]">
-            Protect buyers from irreversible transfers while ensuring sellers get paid after verified delivery.
+            Lock funds in audited smart contracts, verify delivery, and release automatically on timeout. Designed for freelancers, vendors, and teams that need instant clarity.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link href="/create">
@@ -50,6 +50,14 @@ export default function Home() {
             <Link href="/dashboard">
               <Button variant="outline">Open Dashboard</Button>
             </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {["Disputes prevented", "Avg. release time", "Zero intermediaries"].map((label, idx) => (
+              <Card key={label} className="bg-gradient-to-br from-[var(--surface)] via-[var(--surface-soft)] to-[var(--surface)] p-4">
+                <p className="text-xs uppercase tracking-wide text-[var(--muted)]">{label}</p>
+                <p className="mt-1 text-lg font-semibold text-[var(--foreground)]">{["95%", "24h", "100% on-chain"][idx]}</p>
+              </Card>
+            ))}
           </div>
         </motion.div>
 
@@ -107,7 +115,7 @@ export default function Home() {
           </ul>
         </Card>
         <Card className="space-y-3">
-          <h3 className="font-heading text-xl font-semibold">EscrowFlow Advantage</h3>
+          <h3 className="font-heading text-xl font-semibold">EscrowShield Advantage</h3>
           <ul className="space-y-2 text-sm text-[var(--muted)]">
             <li>Funds are locked in audited smart contract logic</li>
             <li>Release conditions are deterministic and transparent</li>
