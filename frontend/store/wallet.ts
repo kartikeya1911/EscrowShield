@@ -71,19 +71,32 @@ export const useWalletStore = create<WalletState>((set, get) => ({
     set({ connecting: true });
 
     try {
-      const accounts = (await provider.send("eth_requestAccounts", [])) as string[];
+      const chainIdHex = `0x${TARGET_CHAIN_ID.toString(16)}`;
+
+      // Ask MetaMask to switch if on the wrong network.
       const network = await provider.getNetwork();
-      const chainId = Number(network.chainId);
+      const currentChainId = Number(network.chainId);
+      if (currentChainId !== TARGET_CHAIN_ID) {
+        try {
+          await provider.send("wallet_switchEthereumChain", [{ chainId: chainIdHex }]);
+        } catch (switchError: any) {
+          toast.error(`Switch MetaMask to chain ${TARGET_CHAIN_ID}`);
+        }
+      }
+
+      const accounts = (await provider.send("eth_requestAccounts", [])) as string[];
+      const refreshedNetwork = await provider.getNetwork();
+      const chainId = Number(refreshedNetwork.chainId);
       set({
         address: accounts[0] ?? null,
         chainId,
         isCorrectNetwork: chainId === TARGET_CHAIN_ID
       });
 
-      if (chainId !== TARGET_CHAIN_ID) {
-        toast.error(`Switch MetaMask to chain ${TARGET_CHAIN_ID}`);
-      } else {
+      if (chainId === TARGET_CHAIN_ID) {
         toast.success("Wallet connected");
+      } else {
+        toast.error(`Switch MetaMask to chain ${TARGET_CHAIN_ID}`);
       }
     } catch (error: any) {
       toast.error(error?.message ?? "Failed to connect wallet");
